@@ -1,0 +1,63 @@
+  <article class="post">
+      <header>
+        <nav> 
+          <%= user_avatar(post.created_by) %>
+          <h4><%= post.created_by.username %></h4>
+        </nav>
+
+        <nav class="actions">
+          <div class="action">
+            <%= embedded_svg "options.svg" %>
+          </div>
+        </nav>
+      </header>
+
+      <section class="image">
+        <% unless post.photo.present? %>
+        <%= image_tag "https://i.picsum.photos/id/457/200/300.jpg?hmac=RK07I110orPDAIl8q1vdjOgPnPvEX278Jy74cgjosyo" %>
+        <% else %>
+          <%= image_tag post.photo %>
+        <% end %>
+      </section>
+
+      <div class="details"> 
+        <section class="actions">
+          <nav>
+
+            <%= render "likes/like", post: post %>
+
+            <div class="action">
+              <div class="like">
+                <%= link_to post do %>
+                <%= embedded_svg "comment.svg" %>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="action">
+              <div class="like">
+                <%= embedded_svg "share.svg" %>
+              </div>
+            </div>
+
+          </nav>
+
+          <nav>
+            <div class="action">
+              <%= embedded_svg "save.svg" %>
+            </div>
+          </nav>
+
+        </section>
+
+        <section class="description">
+          <p><string><%= post.created_by.username %></string><%= post.description %></p>
+        </section>
+
+        <section class="created-at">
+          <%= time_ago_in_words(post.created_at) %> atrás
+        </section>
+
+      </div>
+
+    </article>  
